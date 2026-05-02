@@ -5,7 +5,7 @@ function Home() {
     const [serverHealth, setServerHealth] = useState('Checking...');
 
     useEffect(() => {
-        axios.get(process.env.REACT_APP_API_URL + '/health')
+        axios.get(`${process.env.REACT_APP_API_URL}/health`)
             .then(res => setServerHealth(res.data))
             .catch(() => setServerHealth('FAILED'));
     }, []);
