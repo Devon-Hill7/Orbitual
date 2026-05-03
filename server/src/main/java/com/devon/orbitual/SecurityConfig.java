@@ -35,12 +35,16 @@ public class SecurityConfig {
 
         config.setAllowedOrigins(List.of(
             "http://localhost:5173",
-            "https://your-vercel-app-url.vercel.app"
+            "https://orbitual-one.vercel.app"
         ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
+        config.setAllowedOriginPatterns(List.of(
+            "https://orbitual-one.vercel.app",
+            "http://localhost:5173"
+        ));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
