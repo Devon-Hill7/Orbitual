@@ -1,3 +1,5 @@
+package com.devon.orbitual;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,9 +15,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        System.out.println("SECURITY CONFIG LOADED"); //TESTING PURPOSES ONLY
+
         http
             .csrf(csrf -> csrf.disable())
-            .cors(cors -> {}) // enable CORS
+            .cors(cors -> {}) 
+            .httpBasic(httpBasic -> httpBasic.disable()) 
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/health").permitAll()
                 .anyRequest().authenticated()
@@ -35,6 +40,7 @@ public class SecurityConfig {
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
